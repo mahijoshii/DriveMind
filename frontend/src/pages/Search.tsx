@@ -6,6 +6,13 @@ import EmptyState from "../components/EmptyState";
 import PageHeader from "../components/PageHeader";
 import type { QueryResponse } from "../types";
 
+const examples = [
+  "What documents mention DriveMind?",
+  "Find notes about internships.",
+  "What deadlines are mentioned?",
+  "Summarize action items from my recent docs."
+];
+
 export default function Search() {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState<QueryResponse | null>(null);
@@ -30,12 +37,25 @@ export default function Search() {
     <>
       <PageHeader title="Search" subtitle="Ask across indexed Docs and verify every answer with citations." />
       <section className="search-hero">
-        <div className="search-badge"><Sparkles size={24} /></div>
+        <div className="search-hero-top">
+          <div className="search-badge"><Sparkles size={24} /></div>
+          <div>
+            <h2>Ask your Drive like a knowledge base</h2>
+            <p>Use specific words from your docs for the strongest local-mode results.</p>
+          </div>
+        </div>
         <form className="search-box" onSubmit={submit}>
           <SearchIcon size={20} />
           <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ask about plans, notes, decisions, or research..." />
           <button className="primary" disabled={loading}><Send size={18} /> {loading ? "Searching..." : "Ask"}</button>
         </form>
+        <div className="prompt-row">
+          {examples.map((example) => (
+            <button type="button" key={example} onClick={() => setQuestion(example)}>
+              {example}
+            </button>
+          ))}
+        </div>
       </section>
       {error && <p className="error">{error}</p>}
       {!result && <EmptyState title="No question yet" text="Index Drive from the dashboard, then ask a question to see cited answers here." />}

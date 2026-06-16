@@ -11,7 +11,8 @@
 body {
   margin: 0;
   background:
-    linear-gradient(180deg, #f7faff 0%, #eef3f8 100%);
+    radial-gradient(circle at top left, rgba(31, 111, 235, 0.08), transparent 34rem),
+    linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
 }
 
 a {
@@ -292,7 +293,7 @@ textarea {
 }
 
 .sidebar {
-  background: #0f1724;
+  background: linear-gradient(180deg, #0f1724 0%, #121d2f 100%);
   color: white;
   padding: 24px;
 }
@@ -340,7 +341,7 @@ textarea {
 .main-panel {
   margin: 0 auto;
   max-width: 1120px;
-  padding: 34px;
+  padding: 40px 34px;
   width: 100%;
 }
 
@@ -404,38 +405,57 @@ textarea {
 }
 
 .search-hero {
-  background: #ffffff;
-  border: 1px solid #dce5f0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.96)),
+    #ffffff;
+  border: 1px solid #d6e2ef;
   border-radius: 8px;
-  box-shadow: 0 18px 55px rgba(25, 37, 59, 0.08);
+  box-shadow: 0 18px 55px rgba(25, 37, 59, 0.1);
   display: grid;
   gap: 18px;
   margin-bottom: 22px;
-  padding: 22px;
+  padding: 24px;
+}
+
+.search-hero-top {
+  align-items: center;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: auto 1fr;
 }
 
 .search-badge {
   align-items: center;
-  background: #eef5ff;
-  border: 1px solid #d6e6fb;
+  background: #0f1724;
+  border: 1px solid #263852;
   border-radius: 8px;
-  color: #1f6feb;
+  color: #74c0fc;
   display: inline-flex;
   height: 48px;
   justify-content: center;
   width: 48px;
 }
 
+.search-hero h2 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.search-hero p {
+  color: #607083;
+  margin: 0;
+}
+
 .search-box {
   align-items: center;
-  background: #f8fafc;
-  border: 1px solid #dbe5f0;
+  background: #ffffff;
+  border: 1px solid #cfdbea;
   border-radius: 8px;
   display: grid;
   gap: 12px;
   grid-template-columns: auto 1fr auto;
   margin-bottom: 0;
-  padding: 10px;
+  padding: 12px;
 }
 
 .search-box > svg {
@@ -464,6 +484,29 @@ textarea {
   box-shadow: none;
 }
 
+.prompt-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.prompt-row button {
+  background: #f3f7fc;
+  border: 1px solid #d7e2ee;
+  border-radius: 999px;
+  color: #344054;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 9px 12px;
+}
+
+.prompt-row button:hover {
+  background: #eaf2ff;
+  border-color: #a8c7fa;
+  color: #1f4fbf;
+}
+
 input:focus,
 textarea:focus {
   border-color: #155eef;
@@ -475,6 +518,8 @@ textarea:focus {
 }
 
 .answer-area .panel p {
+  color: #344054;
+  line-height: 1.7;
   white-space: pre-line;
 }
 
@@ -495,6 +540,7 @@ textarea:focus {
 .citation-card {
   display: grid;
   gap: 14px;
+  box-shadow: 0 10px 26px rgba(25, 37, 59, 0.05);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 

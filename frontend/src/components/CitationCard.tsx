@@ -3,10 +3,11 @@ import type { Citation } from "../types";
 
 export default function CitationCard({ citation }: { citation: Citation }) {
   const relevance = Math.max(1, Math.round(citation.score * 100));
+  const label = relevance >= 75 ? "Strong match" : relevance >= 45 ? "Good match" : "Possible match";
   return (
     <article className="citation-card">
       <div>
-        <span className="score-pill">Relevance {relevance}</span>
+        <span className="score-pill">{label} - {relevance}</span>
         <h3>{citation.document_title}</h3>
         <p>{citation.excerpt}</p>
       </div>
