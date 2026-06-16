@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.venv-win/
+venv/
+backend/drivemind.db
+backend/.env
+frontend/.env
+frontend/node_modules/
+frontend/dist/
+work/
+outputs/
+.DS_Store
