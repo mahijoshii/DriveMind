@@ -1,0 +1,28 @@
+import type { DocumentItem, IndexStatus, QueryResponse, User } from "../types";
+
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+
+async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, {
+    credentials: "include",
+    headers: { "Content-Type": "application/json", ...(options.headers ?? {}) },
+    ...options
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.detail ?? "Request failed");
+  }
+  return res.json() as Promise<T>;
+}
+
+export const api = {
+  loginUrl: `${API_URL}/auth/login`,
+  me: () => request<User>("/me"),
+  startIndex: () => request<{ message: string }>("/drive/index", { method: "POST" }),
+  indexStatus: () => request<IndexStatus>("/drive/index/status"),
+  documents: () => request<DocumentItem[]>("/documents"),
+  query: (question: string) => request<QueryResponse>("/query", { method: "POST", body: JSON.stringify({ question }) }),
+  deleteData: () => request<{ message: string }>("/user/data", { method: "DELETE" }),
+  feedback: (message: string, email?: string) =>
+    request<{ message: string }>("/feedback", { method: "POST", body: JSON.stringify({ message, email }) })
+};
