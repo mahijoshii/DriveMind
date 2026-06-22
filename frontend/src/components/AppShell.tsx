@@ -19,7 +19,7 @@ export default function AppShell() {
         </NavLink>
         <div className="sidebar-card">
           <Sparkles size={18} />
-          <p>Private Drive search with cited AI answers.</p>
+          <p>Private Drive search with cited AI answers and source excerpts.</p>
         </div>
         <nav>
           {nav.map((item) => {
