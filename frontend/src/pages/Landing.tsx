@@ -29,8 +29,15 @@ export default function Landing() {
             <span />
           </div>
           <div className="preview-search"><Search size={18} /> What did we decide about launch scope?</div>
-          <div className="preview-answer">The launch plan narrows the beta to Google Docs indexing, cited answers, feedback capture, and one-click data deletion before inviting testers.</div>
+          <div className="preview-answer">
+            <span>Answer</span>
+            The launch plan narrows the beta to Google Docs indexing, cited answers, feedback capture, and one-click data deletion before inviting testers.
+          </div>
           <div className="mini-citation"><FileText size={16} /> Product Planning Doc - "beta to Google Docs indexing..."</div>
+          <div className="preview-footer">
+            <span>Strong match - 94</span>
+            <span>Open in Drive</span>
+          </div>
         </div>
       </section>
       <section className="trust-grid">
