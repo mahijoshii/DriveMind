@@ -11,6 +11,8 @@ export type IndexStatus = {
   processed: number;
 };
 
+export type IndexMode = "recent_opened" | "recent_modified" | "owned_by_me" | "shared_with_me";
+
 export type DocumentItem = {
   id: number;
   title: string;

@@ -4,10 +4,12 @@ import { api } from "../api/client";
 import PageHeader from "../components/PageHeader";
 import StatusCard from "../components/StatusCard";
 import { useAsync } from "../hooks/useAsync";
+import type { IndexMode } from "../types";
 
 export default function Dashboard() {
   const status = useAsync(api.indexStatus, []);
   const [starting, setStarting] = useState(false);
+  const [indexMode, setIndexMode] = useState<IndexMode>("recent_opened");
 
   useEffect(() => {
     if (status.data?.status !== "running" && status.data?.status !== "queued") {
@@ -22,7 +24,7 @@ export default function Dashboard() {
   async function startIndex() {
     setStarting(true);
     try {
-      await api.startIndex();
+      await api.startIndex(indexMode);
       await status.reload();
     } finally {
       setStarting(false);
@@ -61,7 +63,7 @@ export default function Dashboard() {
           <p>DriveMind indexes Google Docs only. It stores document chunks and embeddings for search, never logs document contents, and lets you delete indexed data and OAuth tokens from Settings.</p>
         </div>
       </section>
-      <StatusCard status={status.data} loading={starting || status.loading} onIndex={startIndex} />
+      <StatusCard status={status.data} loading={starting || status.loading} mode={indexMode} onModeChange={setIndexMode} onIndex={startIndex} />
       {status.error && <p className="error">{status.error}</p>}
     </>
   );

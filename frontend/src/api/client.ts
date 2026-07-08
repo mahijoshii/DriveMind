@@ -1,4 +1,4 @@
-import type { DocumentItem, IndexStatus, QueryResponse, User } from "../types";
+import type { DocumentItem, IndexMode, IndexStatus, QueryResponse, User } from "../types";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
@@ -18,7 +18,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 export const api = {
   loginUrl: `${API_URL}/auth/login`,
   me: () => request<User>("/me"),
-  startIndex: () => request<{ message: string }>("/drive/index", { method: "POST" }),
+  startIndex: (mode: IndexMode) => request<{ message: string }>("/drive/index", { method: "POST", body: JSON.stringify({ mode }) }),
   indexStatus: () => request<IndexStatus>("/drive/index/status"),
   documents: () => request<DocumentItem[]>("/documents"),
   query: (question: string) => request<QueryResponse>("/query", { method: "POST", body: JSON.stringify({ question }) }),
