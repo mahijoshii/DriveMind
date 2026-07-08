@@ -418,6 +418,48 @@ textarea {
   gap: 16px;
 }
 
+.filter-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 22px 0 18px;
+}
+
+.filter-option {
+  background: #f8fafc;
+  border: 1px solid #d7e2ee;
+  border-radius: 8px;
+  color: #344054;
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+  min-height: 98px;
+  padding: 14px;
+  text-align: left;
+}
+
+.filter-option strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.filter-option span {
+  color: #607083;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.filter-option.active {
+  background: #ecf9f5;
+  border-color: #8dd7c1;
+  box-shadow: 0 10px 22px rgba(20, 108, 148, 0.1);
+}
+
+.filter-option:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 .onboarding,
 .panel {
   margin-bottom: 18px;
@@ -733,6 +775,10 @@ textarea:focus {
   .document-row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
   }
 
   .search-box {
