@@ -29,6 +29,7 @@ class DocumentResponse(BaseModel):
 
 class QueryRequest(BaseModel):
     question: str = Field(min_length=3, max_length=1000)
+    document_id: int | None = None
 
 
 class Citation(BaseModel):

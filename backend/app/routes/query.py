@@ -15,7 +15,8 @@ rate_limit = InMemoryRateLimiter(limit=30, window_seconds=60)
 
 @router.post("/query", response_model=QueryResponse, dependencies=[Depends(rate_limit)])
 def query(payload: QueryRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    matches = retrieve_chunks(db, user.id, payload.question, limit=5)
+    limit = 10 if payload.document_id else 5
+    matches = retrieve_chunks(db, user.id, payload.question, limit=limit, document_id=payload.document_id)
     citations = [
         Citation(
             document_title=chunk.document.title,

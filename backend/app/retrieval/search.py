@@ -16,6 +16,13 @@ STOPWORDS = {
     "was", "what", "when", "where", "which", "who", "why", "with", "you", "your",
 }
 
+BROAD_DOCUMENT_TERMS = {
+    "summarize", "summary", "overview", "explain", "action", "actions", "item",
+    "items", "todo", "todos", "deadline", "deadlines", "date", "dates",
+    "decision", "decisions", "follow", "followup", "follow-up", "important",
+    "main", "key", "notes",
+}
+
 
 def cosine(a: list[float], b: list[float]) -> float:
     denom = (math.sqrt(sum(x * x for x in a)) * math.sqrt(sum(y * y for y in b))) or 1
@@ -24,6 +31,10 @@ def cosine(a: list[float], b: list[float]) -> float:
 
 def tokenize(text: str) -> list[str]:
     return [token for token in re.findall(r"[a-zA-Z0-9']+", text.lower()) if token not in STOPWORDS]
+
+
+def is_broad_document_question(question: str) -> bool:
+    return bool(set(tokenize(question)) & BROAD_DOCUMENT_TERMS)
 
 
 def lexical_score(question: str, chunk: Chunk) -> float:
@@ -73,9 +84,12 @@ def bm25_scores(question: str, chunks: list[Chunk]) -> dict[int, float]:
     return scores
 
 
-def retrieve_chunks(db: Session, user_id: int, question: str, limit: int = 5) -> list[tuple[Chunk, float]]:
+def retrieve_chunks(db: Session, user_id: int, question: str, limit: int = 5, document_id: int | None = None) -> list[tuple[Chunk, float]]:
     query_vector = get_embedding_provider().embed([question])[0]
-    chunks = db.query(Chunk).filter(Chunk.user_id == user_id).all()
+    query = db.query(Chunk).filter(Chunk.user_id == user_id)
+    if document_id is not None:
+        query = query.filter(Chunk.document_id == document_id)
+    chunks = query.all()
     bm25 = bm25_scores(question, chunks)
     scored = []
     for chunk in chunks:
@@ -89,6 +103,14 @@ def retrieve_chunks(db: Session, user_id: int, question: str, limit: int = 5) ->
         scored.append((chunk, raw_score))
     scored.sort(key=lambda item: item[1], reverse=True)
     useful = [item for item in scored if item[1] > 0][:limit]
+    if document_id is not None and (not useful or is_broad_document_question(question)):
+        ordered = sorted(chunks, key=lambda item: item.position)
+        if len(ordered) <= limit:
+            ordered_chunks = ordered
+        else:
+            step = max(1, len(ordered) // limit)
+            ordered_chunks = ordered[::step][:limit]
+        return [(chunk, max(0.42, 0.82 - (index * 0.08))) for index, chunk in enumerate(ordered_chunks)]
     if not useful:
         return []
     top_score = useful[0][1] or 1
@@ -99,6 +121,9 @@ def retrieve_chunks(db: Session, user_id: int, question: str, limit: int = 5) ->
 def best_excerpt(question: str, content: str, max_chars: int = 520) -> str:
     terms = set(tokenize(question))
     sentences = re.split(r"(?<=[.!?])\s+", content)
+    if is_broad_document_question(question):
+        excerpt = " ".join(sentence.strip() for sentence in sentences[:3] if sentence.strip())
+        return (excerpt or content)[:max_chars]
     if not terms or not sentences:
         return content[:max_chars]
     ranked = []
