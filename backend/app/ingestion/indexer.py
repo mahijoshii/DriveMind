@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.orm import Session
 
 from app.embeddings.providers import dumps_vector, get_embedding_provider
-from app.google.drive import extract_doc_text, list_google_docs
+from app.google.drive import extract_doc_text, filter_label, list_google_docs
 from app.ingestion.chunker import chunk_text
 from app.models.db import Chunk, Document, IndexJob, User, utcnow
 
@@ -20,23 +20,24 @@ def latest_job(db: Session, user_id: int) -> IndexJob:
     return job
 
 
-def index_drive_for_user(user_id: int, session_factory) -> None:
+def index_drive_for_user(user_id: int, session_factory, mode: str = "recent_opened") -> None:
     db: Session = session_factory()
     try:
+        label = filter_label(mode)
         user = db.get(User, user_id)
         if not user:
             return
         job = latest_job(db, user_id)
         job.status = "running"
-        job.message = "Finding recently opened Google Docs in Drive."
+        job.message = f"Finding Google Docs {label} in Drive."
         job.processed = 0
         job.total = 0
         job.updated_at = utcnow()
         db.commit()
 
-        files = list_google_docs(user, db)
+        files = list_google_docs(user, db, mode)
         job.total = len(files)
-        job.message = f"Found {len(files)} recently opened Google Docs."
+        job.message = f"Found {len(files)} Google Docs {label}."
         db.commit()
 
         db.query(Chunk).filter(Chunk.user_id == user_id).delete()

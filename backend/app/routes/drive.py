@@ -4,18 +4,19 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal, get_db
 from app.ingestion.indexer import index_drive_for_user, latest_job
 from app.models.db import Document, IndexJob, User
-from app.models.schemas import DocumentResponse, IndexStatusResponse
+from app.models.schemas import DocumentResponse, IndexRequest, IndexStatusResponse
 from app.security import get_current_user
 
 router = APIRouter(prefix="/drive", tags=["drive"])
 
 
 @router.post("/index")
-def start_index(background_tasks: BackgroundTasks, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    job = IndexJob(user_id=user.id, status="queued", message="Indexing job queued.", total=0, processed=0)
+def start_index(background_tasks: BackgroundTasks, payload: IndexRequest | None = None, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    mode = payload.mode if payload else "recent_opened"
+    job = IndexJob(user_id=user.id, status="queued", message=f"Indexing job queued for {mode.replace('_', ' ')} docs.", total=0, processed=0)
     db.add(job)
     db.commit()
-    background_tasks.add_task(index_drive_for_user, user.id, SessionLocal)
+    background_tasks.add_task(index_drive_for_user, user.id, SessionLocal, mode)
     return {"ok": True, "message": "Indexing started."}
 
 

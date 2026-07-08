@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 
@@ -12,6 +14,10 @@ class IndexStatusResponse(BaseModel):
     message: str
     total: int
     processed: int
+
+
+class IndexRequest(BaseModel):
+    mode: Literal["recent_opened", "recent_modified", "owned_by_me", "shared_with_me"] = "recent_opened"
 
 
 class DocumentResponse(BaseModel):
