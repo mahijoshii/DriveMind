@@ -604,6 +604,40 @@ textarea {
   box-shadow: none;
 }
 
+.scope-banner {
+  align-items: center;
+  background: #ecf9f5;
+  border: 1px solid #bfeadc;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.scope-banner span {
+  color: #087443;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scope-banner strong {
+  color: #172033;
+  flex: 1;
+}
+
+.scope-banner button {
+  background: white;
+  border: 1px solid #bfeadc;
+  border-radius: 999px;
+  color: #087443;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 8px 12px;
+}
+
 .prompt-row {
   display: flex;
   flex-wrap: wrap;
@@ -701,10 +735,44 @@ textarea:focus {
 .document-row {
   display: flex;
   justify-content: space-between;
+  gap: 18px;
 }
 
 .document-row span {
+  display: block;
   color: #667085;
+  margin-top: 6px;
+}
+
+.document-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.document-actions a,
+.document-actions button {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 12px;
+}
+
+.document-actions button {
+  background: #1f6feb;
+  border: 0;
+  color: white;
+  cursor: pointer;
+}
+
+.document-actions a {
+  border: 1px solid #d7e2ee;
+  color: #146c94;
 }
 
 .form {
@@ -775,6 +843,10 @@ textarea:focus {
   .document-row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .document-actions {
+    justify-content: flex-start;
   }
 
   .filter-grid {

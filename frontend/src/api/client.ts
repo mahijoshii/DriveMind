@@ -21,7 +21,7 @@ export const api = {
   startIndex: (mode: IndexMode) => request<{ message: string }>("/drive/index", { method: "POST", body: JSON.stringify({ mode }) }),
   indexStatus: () => request<IndexStatus>("/drive/index/status"),
   documents: () => request<DocumentItem[]>("/documents"),
-  query: (question: string) => request<QueryResponse>("/query", { method: "POST", body: JSON.stringify({ question }) }),
+  query: (question: string, documentId?: number) => request<QueryResponse>("/query", { method: "POST", body: JSON.stringify({ question, document_id: documentId }) }),
   deleteData: () => request<{ message: string }>("/user/data", { method: "DELETE" }),
   feedback: (message: string, email?: string) =>
     request<{ message: string }>("/feedback", { method: "POST", body: JSON.stringify({ message, email }) })
