@@ -167,7 +167,3 @@ Switching OAuth from Testing to Production:
 - Team workspaces and shared indexes.
 - Admin analytics without document-content logging.
 
-## Resume Bullets
-
-- Built DriveMind, a production-ready semantic search engine for Google Drive using OAuth 2.0, Google Drive/Docs APIs, embeddings, and retrieval-augmented generation to answer natural-language questions with document-level citations.
-- Designed a full-stack AI knowledge retrieval system with FastAPI, React, PostgreSQL, Docker, secure OAuth token handling, async document indexing, and privacy controls for real beta users.
