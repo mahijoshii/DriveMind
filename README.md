@@ -10,55 +10,17 @@ Users sign in with Google, index selected Google Docs, ask natural-language ques
 
 ## Product Walkthrough
 
-### 1. Landing
-
-Privacy-first Google Drive search with a clean beta-product landing page.
-
-*coming soon
-
-### 2. Connect and Index
-
-After Google sign-in, users can index recently opened, recently modified, owned, or shared Google Docs while watching progress.
-
-![DriveMind dashboard indexing view](docs/screenshots/dashboard-indexing.png)
-
-### 3. Review Indexed Docs
-
-The document library shows what was indexed, with actions to ask inside one file or open the original Google Doc.
-
-![DriveMind indexed documents page](docs/screenshots/documents.png)
-
-### 4. Ask One Document
-
-Document-scoped search supports summaries, key points, action items, and date/deadline questions.
-
-![DriveMind document search summary](docs/screenshots/doc-search-summary.png)
-
-### 5. Verify the Sources
-
-Every answer includes citation cards with match strength, source title, excerpt, and an Open in Google Drive link.
-
-![DriveMind citation cards](docs/screenshots/citations.png)
-
-### 6. Search Across Drive
-
-Users can search across all indexed docs and compare relevant results from multiple files.
-
-![DriveMind global search](docs/screenshots/global-search.png)
-
-![DriveMind global citations](docs/screenshots/global-citations.png)
-
-### 7. Manage Privacy
-
-Users can delete indexed chunks, embeddings, indexing status, and encrypted OAuth tokens.
-
-![DriveMind settings privacy controls](docs/screenshots/settings.png)
-
-### 8. Collect Tester Feedback
-
-Built-in tester feedback makes the beta easier to improve with real users.
-
-![DriveMind feedback page](docs/screenshots/feedback.png)
+| Step | Preview |
+|------|---------|
+| 1. Land on a privacy-first Google Drive search page. | <img src="docs/screenshots/landing.png" alt="DriveMind landing page" width="720"> |
+| 2. Connect Google and index selected Drive documents. | <img src="docs/screenshots/dashboard-indexing.png" alt="DriveMind dashboard indexing view" width="720"> |
+| 3. Review indexed docs and open the original Google files. | <img src="docs/screenshots/documents.png" alt="DriveMind indexed documents page" width="720"> |
+| 4. Ask a question inside one selected document. | <img src="docs/screenshots/doc-search-summary.png" alt="DriveMind document-scoped search summary" width="720"> |
+| 5. Verify answers with cited excerpts and Drive links. | <img src="docs/screenshots/citations.png" alt="DriveMind cited answer cards" width="720"> |
+| 6. Search across all indexed docs for cross-document answers. | <img src="docs/screenshots/global-search.png" alt="DriveMind global document search" width="720"> |
+| 7. Compare ranked citations from multiple documents. | <img src="docs/screenshots/global-citations.png" alt="DriveMind global search citations" width="720"> |
+| 8. Delete indexed data and encrypted OAuth tokens from Settings. | <img src="docs/screenshots/settings.png" alt="DriveMind settings privacy controls" width="720"> |
+| 9. Submit tester feedback from inside the beta app. | <img src="docs/screenshots/feedback.png" alt="DriveMind tester feedback form" width="720"> |
 
 ## Features
 
