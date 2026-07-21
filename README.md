@@ -2,9 +2,13 @@
 
 DriveMind is an AI-powered Google Drive knowledge search app. Users connect Google, index Google Docs from Drive, ask natural-language questions, and receive grounded answers with citations that include document title, Drive link, and relevant excerpt.
 
+## Demo
+
+[Watch the DriveMind demo](https://drive.google.com/file/d/1COz-9pcUn4Zbc0Hsy5bFRFn6pqVQpxO3/view?usp=sharing)
+
 ## Demo Screenshots
 
-Add screenshots here after deployment:
+Screenshot placeholders:
 
 - Landing page
 - Dashboard indexing progress
