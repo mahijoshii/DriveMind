@@ -8,39 +8,39 @@ Users sign in with Google, index selected Google Docs, ask natural-language ques
 
 [Watch the DriveMind demo](https://drive.google.com/file/d/1COz-9pcUn4Zbc0Hsy5bFRFn6pqVQpxO3/view?usp=sharing)
 
-## Screenshots
+## Product Walkthrough
 
-### Landing
+### 1. Landing
 
 Privacy-first Google Drive search with a clean beta-product landing page.
 
 *coming soon
 
-### Indexing Dashboard
+### 2. Connect and Index
 
-Users can index recently opened, recently modified, owned, or shared Google Docs while viewing progress.
+After Google sign-in, users can index recently opened, recently modified, owned, or shared Google Docs while watching progress.
 
 ![DriveMind dashboard indexing view](docs/screenshots/dashboard-indexing.png)
 
-### Indexed Documents
+### 3. Review Indexed Docs
 
-DriveMind shows every indexed document with actions to ask inside one doc or open the original in Google Drive.
+The document library shows what was indexed, with actions to ask inside one file or open the original Google Doc.
 
 ![DriveMind indexed documents page](docs/screenshots/documents.png)
 
-### Ask One Document
+### 4. Ask One Document
 
 Document-scoped search supports summaries, key points, action items, and date/deadline questions.
 
 ![DriveMind document search summary](docs/screenshots/doc-search-summary.png)
 
-### Cited Answers
+### 5. Verify the Sources
 
-Answers include citation cards with match strength, source title, excerpt, and an Open in Google Drive link.
+Every answer includes citation cards with match strength, source title, excerpt, and an Open in Google Drive link.
 
 ![DriveMind citation cards](docs/screenshots/citations.png)
 
-### Search Across Drive
+### 6. Search Across Drive
 
 Users can search across all indexed docs and compare relevant results from multiple files.
 
@@ -48,13 +48,13 @@ Users can search across all indexed docs and compare relevant results from multi
 
 ![DriveMind global citations](docs/screenshots/global-citations.png)
 
-### Privacy Controls
+### 7. Manage Privacy
 
 Users can delete indexed chunks, embeddings, indexing status, and encrypted OAuth tokens.
 
 ![DriveMind settings privacy controls](docs/screenshots/settings.png)
 
-### Feedback
+### 8. Collect Tester Feedback
 
 Built-in tester feedback makes the beta easier to improve with real users.
 
