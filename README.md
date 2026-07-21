@@ -14,7 +14,7 @@ Users sign in with Google, index selected Google Docs, ask natural-language ques
 
 Privacy-first Google Drive search with a clean beta-product landing page.
 
-![DriveMind landing page](docs/screenshots/landing.png)
+*coming soon
 
 ### Indexing Dashboard
 
