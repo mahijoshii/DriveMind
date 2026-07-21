@@ -1,5 +1,6 @@
-import { Database, FileText, MessageSquare, Search, Settings, Sparkles } from "lucide-react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Database, FileText, LogOut, MessageSquare, Search, Settings, Sparkles } from "lucide-react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { api } from "../api/client";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: Database },
@@ -10,28 +11,41 @@ const nav = [
 ];
 
 export default function AppShell() {
+  const navigate = useNavigate();
+
+  async function logout() {
+    await api.logout();
+    navigate("/", { replace: true });
+  }
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <NavLink to="/dashboard" className="brand">
-          <span className="brand-mark">D</span>
-          <span>DriveMind</span>
-        </NavLink>
-        <div className="sidebar-card">
-          <Sparkles size={18} />
-          <p>Private Drive search with cited AI answers and source excerpts.</p>
+        <div>
+          <NavLink to="/dashboard" className="brand">
+            <span className="brand-mark">D</span>
+            <span>DriveMind</span>
+          </NavLink>
+          <div className="sidebar-card">
+            <Sparkles size={18} />
+            <p>Private Drive search with cited AI answers and source excerpts.</p>
+          </div>
+          <nav>
+            {nav.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink key={item.to} to={item.to} className="nav-link">
+                  <Icon size={18} />
+                  {item.label}
+                </NavLink>
+              );
+            })}
+          </nav>
         </div>
-        <nav>
-          {nav.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink key={item.to} to={item.to} className="nav-link">
-                <Icon size={18} />
-                {item.label}
-              </NavLink>
-            );
-          })}
-        </nav>
+        <button type="button" className="logout-button" onClick={logout}>
+          <LogOut size={18} />
+          Sign out
+        </button>
       </aside>
       <main className="main-panel">
         <Outlet />

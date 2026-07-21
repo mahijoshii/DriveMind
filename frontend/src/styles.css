@@ -338,6 +338,9 @@ textarea {
 .sidebar {
   background: linear-gradient(180deg, #0b1220 0%, #111c2f 62%, #102523 100%);
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 24px;
   position: sticky;
   top: 0;
@@ -381,6 +384,26 @@ textarea {
 .nav-link.active,
 .nav-link:hover {
   background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.logout-button {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #d0d5dd;
+  cursor: pointer;
+  display: flex;
+  font-weight: 800;
+  gap: 10px;
+  justify-content: center;
+  min-height: 44px;
+  width: 100%;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.12);
   color: white;
 }
 

@@ -12,11 +12,15 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.detail ?? "Request failed");
   }
+  if (res.status === 204) {
+    return undefined as T;
+  }
   return res.json() as Promise<T>;
 }
 
 export const api = {
   loginUrl: `${API_URL}/auth/login`,
+  logout: () => request<void>("/auth/logout", { method: "POST" }),
   me: () => request<User>("/me"),
   startIndex: (mode: IndexMode) => request<{ message: string }>("/drive/index", { method: "POST", body: JSON.stringify({ mode }) }),
   indexStatus: () => request<IndexStatus>("/drive/index/status"),

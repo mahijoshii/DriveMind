@@ -48,3 +48,11 @@ def callback(code: str, state: str, request: Request, db: Session = Depends(get_
     redirect.set_cookie("drivemind_session", create_session_token(user.id), httponly=True, samesite="lax", secure=settings.app_env == "production", max_age=60 * 60 * 24 * 7)
     redirect.delete_cookie("oauth_state")
     return redirect
+
+
+@router.post("/logout")
+def logout():
+    response = Response(status_code=204)
+    response.delete_cookie("drivemind_session")
+    response.delete_cookie("oauth_state")
+    return response
